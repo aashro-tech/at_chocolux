@@ -1,0 +1,12 @@
+<div class="main_body_content">
+    <div class="{f:if(condition: '{data.uid} == 1 || {data.uid} == 7', then: 'hero_area', else: 'hero_area_header')}">
+        <f:render partial="Header" arguments="{_all}" />
+    </div>
+    <main>
+        <!--TYPO3SEARCH_begin-->
+        <f:render section="Main" />
+        <f:cObject typoscriptObjectPath="lib.maincontent" />
+        <!--TYPO3SEARCH_end-->
+    </main>
+    <f:render partial="Footer" arguments="{_all}" />
+</div>

@@ -1,0 +1,28 @@
+<f:if condition="{data.tx_mask_footerpart4_title}">
+    <h4>{data.tx_mask_footerpart4_title}</h4>
+</f:if>
+<div class="info_contact">
+    <f:if condition="{data.tx_mask_footerpart4_repeat}">
+        <f:for each="{data.tx_mask_footerpart4_repeat}" as="data_item">
+            <f:if condition="{data_item.tx_mask_footerpart4_links}">
+                <f:if condition="{data_item.tx_mask_footerpart4_link_label}">
+                    <f:link.typolink parameter="{data_item.tx_mask_footerpart4_links}">
+                        <f:for each="{data_item.tx_mask_icons}" as="file">
+                            <f:image image="{file}" width="16" class="m-2" />
+                        </f:for>
+                        {data_item.tx_mask_footerpart4_link_label}
+                    </f:link.typolink>
+                </f:if>
+            </f:if> 
+        </f:for>
+    </f:if>
+</div>
+<div class="row info_form_social_row">
+    <div class="social_box">
+        <f:for each="{data.tx_mask_social}" as="file">
+            <f:link.typolink parameter="{file.link}">
+                <f:image image="{file}" width="50" height="50" class=" m-2 p-3 bg-black"/>
+            </f:link.typolink>
+        </f:for>
+    </div>
+</div>

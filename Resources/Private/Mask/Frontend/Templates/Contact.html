@@ -1,0 +1,27 @@
+<section class="contact_section layout_padding">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-5 col-lg-4 offset-md-1 offset-lg-2">
+                <div class="form_container">
+                    <f:if condition="{data.tx_mask_contact_title}">
+                        <div class="heading_container">
+                            <h2>{data.tx_mask_contact_title}</h2>
+                        </div>
+                    </f:if>
+                    <f:if condition="{data.tx_mask_contact_form}">
+                        <f:for each="{data.tx_mask_contact_form}" as="data_item">
+                            <f:cObject typoscriptObjectPath="lib.tx_mask.content">{data_item.uid}</f:cObject>
+                        </f:for>
+                    </f:if>
+                </div>
+            </div>
+            <div class="col-md-6  px-0">
+                <div class="map_container">
+                    <div class="map">
+                        <f:format.raw>{data.tx_mask_google_map_link}</f:format.raw>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

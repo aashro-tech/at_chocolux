@@ -1,0 +1,57 @@
+<f:asset.css identifier="client_section">.client_section a { pointer-events: none; } .client_section .client_container .box .img-box {position: relative;width: 175px;min-width: 175px;padding: 0 0 20px 20px;margin-right: 25px;}.carousel-inner {overflow: hidden;position: relative;width: 100%;}.client_section .box{display: flex;-webkit-box-align: start;-ms-flex-align: start;align-items: flex-start;padding: 0 15px 0 15px;}.client_section .client_container .box .detail-box h4 {font-weight: 600;}.client_section .client_container .box .detail-box p {font-size: 13px;margin-top: 10px;margin-bottom: 25px;}.client_section .heading_container {margin-bottom: 45px;padding-left: 30%;}
+.heading_container h2 { position: relative;font-weight: bold;font-size: 2rem;font-style: italic;}
+.client_section .client_container .box .img-box::before { content: "";position: absolute;left: 0;bottom: 0;width: 75%;height: 75%;background-color: #ffffff;-webkit-box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.1);box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.1);}
+.detail-box p a { color: #0d0d11;font-weight: bold; }
+.client_section .client_container .box .detail-box h4 { font-size: 20px;font-weight: 600; }
+.client_section .client_container .box .img-box img { position: relative;z-index: 3; }
+</f:asset.css>
+<section class="client_section">
+    <div class="container-fluid">
+        <div class="row justify-content-end">
+            <div class="col-lg-4 ml-auto">
+                <div class="img-box sub_img-box">
+                    <f:for each="{data.tx_mask_testimonial_img}" as="file">
+                        <img src="<f:uri.image image='{file}' />" />
+                    </f:for>
+                </div>
+            </div>
+            <div class="col-lg-8 px-0">
+                <div class="client_container">
+                <f:asset.css identifier="client-bg-{data.uid}">.client_container {color: #ffffff;padding: 75px 0 175px 0;background-image: url('{f:uri.image(image:data.tx_mask_background_img.0)}');background-size: 90% 100%;background-position: bottom right;background-repeat: no-repeat;}</f:asset.css>
+                    <div class="heading_container">
+                        <f:if condition="{data.tx_mask_testimonial_title}">
+                            <h2>{data.tx_mask_testimonial_title}</h2>
+                        </f:if>
+                    </div>
+                    <div id="customCarousel2" class="carousel_slide" data-ride="carousel" >
+                        <div class="carousel-inner" >
+                            <f:if condition="{data.tx_mask_testimonial_repeat}">
+                               <f:for each="{data.tx_mask_testimonial_repeat}" as="data_item" iteration="i">
+                                    <f:if condition="{i.isFirst}">
+                                        <div class="{f:if(condition: '{i.isFirst}' ,then: 'carousel-item active' ,else: 'carousel-item')}">
+                                            <div class="box">
+                                                <div class="img-box">
+                                                    <f:for each="{data_item.tx_mask_testimonial_img2}" as="file">
+                                                        <img src="{f:uri.image(image: file)}" />
+                                                    </f:for>
+                                                </div>
+                                                <div class="detail-box">
+                                                    <f:if condition="{data_item.tx_mask_testimonial_title2}">
+                                                        <h4>{data_item.tx_mask_testimonial_title2}</h4>
+                                                    </f:if>
+                                                    <f:if condition="{data_item.tx_mask_desc}">
+                                                        {data_item.tx_mask_desc -> f:format.raw()}
+                                                    </f:if>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </f:if>
+                                </f:for>
+                            </f:if>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

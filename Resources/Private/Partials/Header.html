@@ -1,0 +1,34 @@
+<f:if condition="{MainMenu}">
+    <f:render section="MainMenu" arguments="{_all}" />
+</f:if>
+<f:section name="MainMenu">
+    <header class="header_section">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container ">
+                <f:if condition="{settings.logotitle}">
+                    <a class="navbar-brand" href="/">
+                        {settings.logotitle}
+                    </a>
+                </f:if>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class=""> </span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <f:if condition="{MainMenu}">
+                        <ul class="navbar-nav ml-auto">
+                            <f:for each="{MainMenu}" as="item">
+                                <f:if condition="{item.title}">
+                                    <li class="nav-item">
+                                        <a href="{item.link}" title="{item.title}" class="nav-link" >{item.title}</a>
+                                    </li>
+                                </f:if>
+                            </f:for>
+                        </ul>
+                    </f:if>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <f:cObject typoscriptObjectPath="lib.carouselsection" />
+</f:section>     
+

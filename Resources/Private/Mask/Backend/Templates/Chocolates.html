@@ -1,0 +1,60 @@
+<f:asset.css identifier="chocolate_container">
+    .chocolate_section a { pointer-events: none; }
+    .chocolate_section .heading_container {align-items: center;text-align: center;margin-bottom: 25px; }
+    .chocolate_section .heading_container h2 {font-style: italic;position: relative;font-weight: bold;font-size: 2.5rem; }
+    .chocolate_section .heading_container p a {color: #46200b !important;font-weight: bold !important;font-style: italic; }
+    .chocolate_section .chocolate_container {padding-bottom: 75px;display: flex;justify-content: center; }
+    .chocolate_section .slick-slider {margin-bottom: 30px; }
+    .slick-track {position: relative;display: block; }
+    .chocolate_section .box {text-align: center;margin: 15px;display: flex;flex-direction: column;align-items: center;border: 1px solid #6c6c6c;padding-top: 25px;transition: all 0.3s;width: 100%;}
+    .chocolate_section .box .img-box {width: 200px;height: 200px;display: -webkit-box;display: -ms-flexbox;display: flex;justify-content: center;align-items: center;}
+    .img-box {padding-right: 10px !important;}
+    .chocolate_section .box .detail-box {width: 100%;background-color: #46200b;color: #ffffff;padding: 15px;margin-top: 10px;opacity: 0;visibility: hidden;-webkit-transition: all 0.3s;transition: all 0.3s;}
+    .chocolate_section .box:hover .detail-box {visibility: visible;opacity: 1;}
+    .chocolate_section .box .detail-box h6 {text-transform: uppercase;font-weight: 600;}
+    .chocolate_section .box .detail-box h6 span {color: #cb4e08;}
+    .chocolate_section .box .detail-box h5 {font-weight: 600;}
+    .chocolate_section .box .detail-box a {color: #ffffff;font-size: 14px;}
+</f:asset.css>
+
+<section class="chocolate_section">
+  <div class="container">
+        <div class="heading_container">
+            <f:if condition="{data.tx_mask_desc}">
+                {data.tx_mask_desc -> f:format.raw()}
+            </f:if>
+        </div>
+    </div>
+    <f:if condition="{data.tx_mask_chocolates_repeat}">
+        <div class="container">
+            <div class="chocolate_container">
+                <f:for each="{data.tx_mask_chocolates_repeat}" as="data_item" iteration="i">
+                    <f:if condition="{i.cycle} <= 3">
+                        <div class="box">
+                            <div class="img-box">
+                                <f:for each="{data_item.tx_mask_chocolates_images}" as="file">
+                                    <f:image image="{file}" />
+                                </f:for>
+                            </div>
+                            <div class="detail-box">
+                                <f:if condition="{data_item.tx_mask_chocolates_title2}">
+                                    <h6>{data_item.tx_mask_chocolates_title2}
+                                        <f:if condition="{data_item.tx_mask_chocolates_subtitle}">
+                                            <span>{data_item.tx_mask_chocolates_subtitle}</span>
+                                        </f:if>
+                                    </h6>
+                                </f:if>
+                                <f:if condition="{data_item.tx_mask_chocolates_price}">
+                                    <h5>{data_item.tx_mask_chocolates_price}</h5>
+                                </f:if>
+                                <f:if condition="{data_item.tx_mask_chocolateslink_label}">
+                                    {data_item.tx_mask_chocolateslink_label}
+                                </f:if>
+                            </div>
+                        </div>
+                    </f:if>
+                </f:for>
+            </div>
+        </div>
+    </f:if>
+</section>

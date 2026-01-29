@@ -1,0 +1,16 @@
+<div class="d-flex justify-content-center py-4">
+    <f:if condition="{data.tx_mask_footerpart5_text}">
+        <f:variable name="year">
+            <f:format.date format="Y" base="{dateObject}" >0 Year</f:format.date>
+        </f:variable>
+
+        <f:if condition="{data.tx_mask_copyright}">
+            <p>
+                &copy; {year}
+                <f:format.stripTags allowedTags="<a>">
+                    {data.tx_mask_copyright}
+                </f:format.stripTags>
+            </p>
+        </f:if>
+    </f:if>
+</div>

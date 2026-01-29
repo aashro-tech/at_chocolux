@@ -1,0 +1,27 @@
+<f:asset.css identifier="info_contact" >.info_contact a { pointer-events: none; } .info_contact{margin-right: 5px;width: 100%;}.social_box img{padding: 3rem; margin: 2rem; height: 50px !important;}</f:asset.css>
+<f:if condition="{data.tx_mask_footerpart4_title}">
+    <h4 style="font-style: italic;">{data.tx_mask_footerpart4_title}</h4>
+</f:if>
+<div class="info_contact">
+    <f:if condition="{data.tx_mask_footerpart4_repeat}">
+        <f:for each="{data.tx_mask_footerpart4_repeat}" as="data_item">
+            <f:if condition="{data_item.tx_mask_footerpart4_links}">
+                <f:if condition="{data_item.tx_mask_footerpart4_link_label}">
+                    <f:for each="{data_item.tx_mask_icons}" as="file">
+                        <p>
+                            <f:image image="{file}" width="15" />
+                            {data_item.tx_mask_footerpart4_link_label}
+                        </p>
+                    </f:for>
+                </f:if>
+            </f:if>
+        </f:for>
+    </f:if>
+    <div class="row info_form_social_row">
+        <div class="social_box">
+            <f:for each="{data.tx_mask_social}" as="file">
+                <f:image image="{file}" width="50px" height="50px" class=" m-2 p-3 bg-black"/>
+            </f:for>
+        </div>
+    </div>
+</div>

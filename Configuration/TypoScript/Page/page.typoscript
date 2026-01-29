@@ -1,0 +1,155 @@
+################
+### CONSTANT ###
+################
+
+plugin {
+    at_chocolux {
+        settings {
+            logo = {$at_chocolux.website.settings.logo}
+            logotitle = {$at_chocolux.website.settings.logotitle}
+            rootpage = {$at_chocolux.website.settings.rootpage}
+            mainmenu = {$at_chocolux.website.settings.main_menu}
+        }
+    }
+}
+
+########################
+### MAIN PAGE OBJECT ###
+########################
+
+page = PAGE
+page {
+
+    // Set default page typenum
+    typeNum = 0
+
+    // Setup favion
+    shortcutIcon = {$at_chocolux.website.settings.favicon}
+
+    // Set viewport
+    meta {
+        viewport = width=device-width, initial-scale=1.0
+    }
+
+    // Initiate all the css-together
+    includeCSS {
+        10 =  EXT:at_chocolux/Resources/Public/stylesheet/bootstrap.css
+        20 =  https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css
+        40 =  https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css
+        50 =  https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap
+        60 =  EXT:at_chocolux/Resources/Public/stylesheet/slick-theme.css
+        70 =  EXT:at_chocolux/Resources/Public/stylesheet/font-awesome.min.css
+        80 =  EXT:at_chocolux/Resources/Public/stylesheet/style.css
+        90 =  EXT:at_chocolux/Resources/Public/stylesheet/responsive.css
+        100 =  EXT:at_chocolux/Resources/Public/stylesheet/custom.css
+    }
+
+    // Initiate all the js-together
+    includeJSFooter {
+        40 = EXT:at_chocolux/Resources/Public/javascript/jquery-3.4.1.min.js
+        50 = EXT:at_chocolux/Resources/Public/javascript/bootstrap.js
+        70 = https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js
+        80 = EXT:at_chocolux/Resources/Public/javascript/custom.js
+        90 = https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap
+    }
+
+    // Let's start fluid_styled_content
+    10 = FLUIDTEMPLATE
+    10 {
+        layoutRootPath = {$at_chocolux.website.paths.layoutRootPath}
+        partialRootPath = {$at_chocolux.website.paths.partialRootPath}
+        templateRootPath = {$at_chocolux.website.paths.templateRootPath}
+
+        // Let's automatically choose backend layout and template
+        file.stdWrap.cObject = CASE
+        file.stdWrap.cObject {
+            key {
+                data = levelfield:-1, backend_layout_next_level, slide
+                override.field = backend_layout
+            }
+
+            default = TEXT
+            default.value = {$at_chocolux.website.paths.templateRootPath}Default.html
+        }
+
+        settings < plugin.at_chocolux.settings
+
+        // Generate menu with DataProcessing
+        dataProcessing {
+
+            // Main menu
+            101 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+            101 {
+                levels = 5
+                special = directory
+                special.value = {$at_chocolux.website.settings.main_menu}
+                expandAll = 1
+                includeSpacer = 1
+                as = MainMenu
+            }
+
+            // Footer menu
+            102 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+            102 {
+                levels = 5
+                special = directory
+                special.value = 23
+                expandAll = 1
+                includeSpacer = 1
+                as = FooterMenu
+            }
+        }
+    }
+}
+
+#########################
+### GLOBAL LIB OBJECT ###
+#########################
+
+lib {
+    // Define default content
+    content = CONTENT
+    content < styles.content.get
+
+    headerContent < lib.content
+    headerContent.select.where = colPos = 0
+
+    carouselsection < lib.content
+    carouselsection.select.where = colPos = 1
+
+    maincontent < lib.content
+    maincontent.select.where = colPos = 2
+
+    Footerpart2< lib.content
+    Footerpart2.select.where = colPos = 4
+    Footerpart2.select.pidInList = 1
+
+    Footerpart3< lib.content
+    Footerpart3.select.where = colPos = 5
+    Footerpart3.select.pidInList = 1
+
+    Footerpart4< lib.content
+    Footerpart4.select.where = colPos = 6
+    Footerpart4.select.pidInList = 1
+
+    Footerpart5< lib.content
+    Footerpart5.select.where = colPos = 7
+    Footerpart5.select.pidInList = 1
+
+    datenschutzhinweise < lib.content
+    datenschutzhinweise.select {
+        where = colPos = 0
+        pidInList = 8
+    }
+}
+
+plugin.tx_atinstagram_instagramfeeds {
+    view {
+        # cat=plugin.tx_atinstagram/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:at_chocolux/Resources/Private/Extensions/at_instagram/Templates/
+        # cat=plugin.tx_atinstagram/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:at_chocolux/Resources/Private/Extensions/at_instagram/Partials/
+        # cat=plugin.tx_atinstagram/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:at_chocolux/Resources/Private/Extensions/at_instagram/Layouts/
+    }
+}

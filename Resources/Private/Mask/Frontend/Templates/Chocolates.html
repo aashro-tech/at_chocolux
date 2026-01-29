@@ -1,0 +1,43 @@
+<section class="chocolate_section">
+    <div class="container">
+        <div class="heading_container">
+            <f:if condition="{data.tx_mask_desc}">
+                {data.tx_mask_desc -> f:format.html()}
+            </f:if>
+        </div>
+    </div>
+    <f:if condition="{data.tx_mask_chocolates_repeat}">
+        <div class="container">
+            <div class="chocolate_container">
+                <f:for each="{data.tx_mask_chocolates_repeat}" as="data_item">
+                    <div class="box">
+                        <div class="img-box">
+                            <f:for each="{data_item.tx_mask_chocolates_images}" as="file">
+                                <f:image image="{file}" width="200px"/>
+                            </f:for>
+                        </div>
+                        <div class="detail-box">
+                            <f:if condition="{data_item.tx_mask_chocolates_title2}">
+                                <f:if condition="{data_item.tx_mask_chocolates_subtitle}">
+                                    <h6>{data_item.tx_mask_chocolates_title2}
+                                        <span>{data_item.tx_mask_chocolates_subtitle}</span>
+                                    </h6>
+                                </f:if>
+                            </f:if>
+                            <f:if condition="{data_item.tx_mask_chocolates_price}">
+                                <h5>{data_item.tx_mask_chocolates_price}</h5>
+                            </f:if>
+                            <f:if condition="{data_item.tx_mask_chocolates_link}">
+                                <f:if condition="{data_item.tx_mask_chocolateslink_label}">
+                                    <f:link.typolink parameter="{data_item.tx_mask_chocolates_link}">
+                                        {data_item.tx_mask_chocolateslink_label}
+                                    </f:link.typolink>
+                                </f:if>
+                            </f:if>
+                        </div>
+                    </div>
+                </f:for>
+            </div>
+        </div>
+    </f:if>
+</section>

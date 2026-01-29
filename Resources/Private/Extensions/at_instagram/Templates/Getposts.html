@@ -1,0 +1,126 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+	<f:layout name="Default" />
+	
+	<f:section name="content">
+			<f:if condition="{instauser}">
+				<f:then>
+					<f:if condition="{instamedia}">
+						<f:then>
+							<f:if condition="{data.display_type} == 3">
+								<f:then>
+									<div class="instagram-slider posts-per-column-{data.posts_per_column}" data-posts-per-view="{data.posts_per_column}">
+									    <div class="slider-container">
+									        <div class="slider-track">
+									            <f:for each="{instamedia}" as="instadata" iteration="i">
+									                <div class="slider-item">
+									                    <a href="{instadata.permalink}" target="_blank">
+									                        <f:if condition="{instadata.media_type}=='VIDEO'">
+									                            <f:then>
+									                            	<f:variable name="instaCaption"><f:format.crop maxCharacters="150" append="...">{instadata.caption}</f:format.crop></f:variable>
+									                                <img src="{instadata.thumbnail_url}" class="slider-image" alt="{instaCaption}" />
+									                                <f:if condition="{instaCaption}"><div class="caption">{instaCaption}</div></f:if>
+									                            </f:then>
+									                            <f:else>
+									                            	<f:variable name="instaCaption"><f:format.crop maxCharacters="150" append="...">{instadata.caption}</f:format.crop></f:variable>
+									                                <img src="{instadata.media_url}" class="slider-image" alt="{instaCaption}" />
+									                                <f:if condition="{instaCaption}"><div class="caption">{instaCaption}</div></f:if>
+									                            </f:else>
+									                        </f:if>
+									                    </a>
+									                </div>
+									            </f:for>
+									        </div>
+									    </div>
+									    <button class="slider-control slider-prev" type="button" aria-label="Previous">
+									        <span class="slider-arrow slider-arrow-left"></span>
+									    </button>
+									    <button class="slider-control slider-next" type="button" aria-label="Next">
+									        <span class="slider-arrow slider-arrow-right"></span>
+									    </button>
+									</div>
+								</f:then>
+								<f:else>
+										<f:render partial="Posts" arguments="{instamedia:instamedia,data:data}" />
+								</f:else>
+							</f:if>
+						</f:then>
+						<f:else>
+							<f:translate key="instagram.noinstamedia" extensionName="at_instagram" />
+						</f:else>
+					</f:if>
+				</f:then>
+				<f:else>
+					<f:translate key="instagram.noapi" extensionName="at_instagram" />
+				</f:else>
+			</f:if>
+		<f:asset.script identifier="script">
+		   	<f:asset.script identifier="instagram-slider">
+				document.addEventListener('DOMContentLoaded', function () {
+
+				    document.querySelectorAll('.instagram-slider').forEach(slider => {
+
+				        const track = slider.querySelector('.slider-track');
+				        const items = slider.querySelectorAll('.slider-item');
+				        const prevBtn = slider.querySelector('.slider-prev');
+				        const nextBtn = slider.querySelector('.slider-next');
+
+				        const postsPerView = parseInt(slider.dataset.postsPerView) || 4;
+				        let index = 0;
+
+				        /* ---------- CLONE FOR INFINITE LOOP ---------- */
+				        for (let i = 0; i < postsPerView; i++) {
+				            track.appendChild(items[i].cloneNode(true));
+				            track.insertBefore(
+				                items[items.length - 1 - i].cloneNode(true),
+				                track.firstChild
+				            );
+				        }
+
+				        let itemWidth = items[0].offsetWidth;
+				        let position = -itemWidth * postsPerView;
+				        track.style.transform = `translateX(${position}px)`;
+
+				        function moveSlide(dir) {
+				            index += dir;
+				            track.style.transition = 'transform 0.5s ease';
+				            position -= dir * itemWidth;
+				            track.style.transform = `translateX(${position}px)`;
+				        }
+
+				        track.addEventListener('transitionend', () => {
+				            if (index >= items.length) {
+				                index = 0;
+				                track.style.transition = 'none';
+				                position = -itemWidth * postsPerView;
+				                track.style.transform = `translateX(${position}px)`;
+				            }
+				            if (index < 0) {
+				                index = items.length - 1;
+				                track.style.transition = 'none';
+				                position = -itemWidth * (items.length);
+				                track.style.transform = `translateX(${position}px)`;
+				            }
+				        });
+
+				        nextBtn.addEventListener('click', () => moveSlide(1));
+				        prevBtn.addEventListener('click', () => moveSlide(-1));
+
+				        /* ---------- AUTOPLAY ---------- */
+				        setInterval(() => moveSlide(1), 3000);
+
+				        /* ---------- RESPONSIVE ---------- */
+				        window.addEventListener('resize', () => {
+				            itemWidth = items[0].offsetWidth;
+				            position = -itemWidth * postsPerView;
+				            track.style.transition = 'none';
+				            track.style.transform = `translateX(${position}px)`;
+				        });
+
+				    });
+
+				});
+				</f:asset.script>
+
+		</f:asset.script>
+	</f:section>
+</html>

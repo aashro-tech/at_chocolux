@@ -1,0 +1,68 @@
+mod {
+  web_layout {
+    BackendLayouts {
+      # BACKENDLAYOUT: default
+      default {
+        title = LLL:EXT:at_chocolux/Resources/Private/Language/BELayouts/locallang.xlf:palette.home
+        config {
+          backend_layout {
+            colCount = 12
+            rowCount = 5
+            rows {
+              2 {
+                columns{
+                  1{
+                    name = Top
+                    colPos = 1
+                    colspan = 12
+                  }
+                }
+              }
+              3 {
+                columns{
+                  1{
+                    name = Normal
+                    colPos = 2
+                    colspan = 12
+                  }
+                }
+              }
+              4 {
+                columns {
+                  1 {
+                    name = No title
+                    colspan = 3
+                  }
+                  2 {
+                    name = Center
+                    colPos = 4
+                    colspan = 3
+                  }
+                  3 {
+                    name = Center
+                    colPos = 5
+                    colspan = 3
+                  }
+                  4 {
+                    name = Right
+                    colPos = 6
+                    colspan = 3
+                  }
+                }
+              }
+            5 {
+                columns{
+                  1{
+                    name = Full width footer column
+                    colPos = 7
+                    colspan = 12
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

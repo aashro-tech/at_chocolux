@@ -1,0 +1,19 @@
+<div class="info_insta">
+    <f:if condition="{data.tx_mask_footerpart2_title}">
+        <h4>{data.tx_mask_footerpart2_title}</h4>
+    </f:if>
+    <f:if condition="{data.tx_mask_footerpart2_repeat}">
+        <f:for each="{data.tx_mask_footerpart2_repeat}" as="data_item">
+            <div class="insta_box">
+                <div class="img-box">
+                    <f:for each="{data_item.tx_mask_footerpart2_img}" as="file">
+                        <f:image image="{file}" width="45px"/>
+                    </f:for>
+                </div>
+                <f:if condition="{data_item.tx_mask_footerpart2_text}">
+                    <p>{data_item.tx_mask_footerpart2_text}</p>
+                </f:if>
+            </div>
+        </f:for>
+    </f:if>
+</div>

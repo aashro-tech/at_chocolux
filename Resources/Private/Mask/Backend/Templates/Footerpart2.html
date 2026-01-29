@@ -1,0 +1,21 @@
+<f:asset.css identifier="info_insta">.info_insta .insta_box {display: -webkit-box;margin-bottom:5px;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;}.info_insta .insta_box .img-box {width: 65px;min-width: 65px;height: 65px;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;-webkit-box-align: center;-ms-flex-align: center;align-items: center;background-color: #ffffff;margin-right: 10px;}</f:asset.css>
+
+<div class="info_insta">
+    <f:if condition="{data.tx_mask_footerpart2_title}">
+        <h4>{data.tx_mask_footerpart2_title}</h4>
+    </f:if>
+    <f:if condition="{data.tx_mask_footerpart2_repeat}">
+        <f:for each="{data.tx_mask_footerpart2_repeat}" as="data_item">
+            <div class="insta_box">
+                <div class="img-box">
+                    <f:for each="{data_item.tx_mask_footerpart2_img}" as="file">
+                        <f:image image="{file}"/>
+                    </f:for>
+                </div>
+                <f:if condition="{data_item.tx_mask_footerpart2_text}">
+                    <f:format.raw>{data_item.tx_mask_footerpart2_text}</f:format.raw>
+                </f:if>
+            </div>
+        </f:for>
+    </f:if>
+</div>

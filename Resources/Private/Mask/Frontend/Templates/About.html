@@ -1,0 +1,35 @@
+<section class="about_section layout_padding">
+    <div class="container  ">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="detail-box">
+                    <div class="heading_container">
+                        <f:if condition="{data.tx_mask_about_title}">
+                            <h2>{data.tx_mask_about_title}</h2>
+                        </f:if>
+                    </div>
+                    <f:if condition="{data.tx_mask_desc}">
+                        <f:format.html>{data.tx_mask_desc}</f:format.html>
+                    </f:if>
+                    <f:if condition="{data.tx_mask_about_link}">
+                        <f:link.typolink parameter="{data.tx_mask_about_link}">
+                            <f:if condition="{data.tx_mask_about_link_label}">
+                                <span>{data.tx_mask_about_link_label}</span>
+                                <f:for each="{data.tx_mask_about_linkimage}" as="file">
+                                    <f:image image="{file}" width="65px" />
+                                </f:for>
+                            </f:if>
+                        </f:link.typolink>
+                    </f:if>
+                </div>
+            </div>
+            <f:for each="{data.tx_mask_about_image}" as="file">
+                <div class="col-md-6">
+                    <div class="img-box">
+                        <f:image image="{file}" width="555px" />
+                    </div>
+                </div>
+            </f:for>
+        </div>
+    </div>
+</section>

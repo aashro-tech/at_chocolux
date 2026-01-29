@@ -1,0 +1,11 @@
+<div class="d-flex justify-content-center p-4">
+    <f:if condition="{data.tx_mask_footerpart5_text}">
+        <f:variable name="year">
+            <f:format.date format="Y" base="{dateObject}"> 0 year</f:format.date>
+        </f:variable>
+        &copy; <span id="displayYear" class="px-1"> {year}</span>
+        <f:if condition="{data.tx_mask_copyright}">
+            {data.tx_mask_copyright -> f:format.raw()}
+        </f:if> 
+    </f:if>
+</div>

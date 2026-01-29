@@ -1,0 +1,43 @@
+<footer class="footer">
+  <section class="info_section layout_padding2">
+    <div class="container">
+      <div class="row info_main_row">	
+        <div class="col-md-6 col-lg-3">
+        	<div class="info_links">
+            <h4>
+              <f:translate key="footermenutitle" extensionName="at_chocolux"/>
+            </h4>
+            <div class="info_links_menu">
+            	<f:render  section="FooterMenu" arguments="{_all}" />
+  			      <f:section name="FooterMenu">
+  				      <f:if condition="{FooterMenu}">
+  			          <f:for each="{FooterMenu}" as="item" iteration="i">
+  	                <a href="{item.link}" class="{item.data.section_class}">
+  	                  {item.title}
+  	                </a>
+  			          </f:for>
+  				      </f:if>
+  					  </f:section>
+  		       </div>
+        	  </div>
+          </div>
+        <div class="col-md-6 col-lg-3">
+          <f:cObject typoscriptObjectPath="lib.Footerpart2" />
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <f:cObject typoscriptObjectPath="lib.Footerpart3" />
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <f:cObject typoscriptObjectPath="lib.Footerpart4" />
+        </div>
+      </div>
+    </div>
+  </section>
+</footer>
+<footer class="container-fluid footer_section">
+  <div class="container">
+    <div class="col-md-11 col-lg-8 mx-auto ">
+      <f:cObject typoscriptObjectPath="lib.Footerpart5" />
+    </div>
+  </div>
+</footer>

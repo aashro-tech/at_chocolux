@@ -1,0 +1,64 @@
+<f:asset.css identifier="slider_section">.slider_section a { pointer-events: none; } .slider_section .container {width: 100%;padding-right: 15px;padding-left: 15px;margin-right:auto;margin-left: auto;}.carousel_btn-box{position: absolute;top: 50%;}.carousel_btn-box .carousel-control-prev,.slider_section .carousel_btn-box .carousel-control-next {position: unset;width: 35px;height: 35px;font-size:12px;background-color: #ffffff;opacity: 1;color: #a04120;margin: 2.5px 0;top: 50%;} .slider_section::after {content:"";position: absolute;top: 25px;right: 45px;width: 550px;height: 550px;background-image:url("image");background-size: cover;background-position: bottom right;z-index: 1;}.slider_section{color:#fff;font-family: "SnellBT Regular", sans-serif;}.detail_box h1 { margin-top: 20px;font-size: 2rem;font-weight: bold;margin-bottom: 30px;font-family: "SnellBT Regular", sans-serif;font-style: italic;}.detail_box h1 span {font-size: 2.5em;}.detail_box .top-butn {display: flex;align-items: center;font-family: "SnellBT Regular", sans-serif;color: #fff;font-weight: 500;margin-top: 35px;font-size: 20px;margin-left: 15px;}.slider_section .carousel_btn-box {position: absolute;top: 45%;left: 0;display: -webkit-box;display: -ms-flexbox;display: flex;flex-direction: column;transform: translateY(-50%);z-index: 3;}.top-butn span {margin-right: 10px;margin-bottom: 3px;}
+</f:asset.css>
+
+<!-- carousel starts -->
+<section class="slider_section ">
+    <f:for each="{data.tx_mask_background_choco}" as="choco-image" iteration="i">
+        <f:for each="{data.tx_mask_background_image}" as="bg-image" iteration="i">
+            <f:asset.css identifier="bgimage">.slider_section::before {content: "";position: absolute;top: 65px;left:0px;width: 75%;height: 75%;background-image: url('{f:uri.image(image: choco-image)}');background-size:100% 100%;z-index: 2;}.slider_section::after {content: "";position: absolute;top: 62px;right:0px;width: 550px;height: 75%;background-image: url('{f:uri.image(image: bg-image)}');background-size:cover;background-position: bottom right;z-index: 1;}.carousel {position: relative;z-index: 10;}</f:asset.css>
+            <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <f:if condition="{data.tx_mask_carousel_repeat}">
+                        <f:for each="{data.tx_mask_carousel_repeat}" as="data_item" iteration="i">
+                            <f:if condition="{i.isFirst}">
+                                <div
+                                    class="carousel-item active">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="detail_box" style="margin-left: 65px;">
+                                                    <f:if condition="{data_item.tx_mask_carousel_title}">
+                                                        <f:if condition="{data_item.tx_mask_carousel_subtitle}">
+                                                            <h1>{data_item.tx_mask_carousel_title}<br>
+                                                            <span>{data_item.tx_mask_carousel_subtitle}</span></h1>
+                                                        </f:if>
+                                                    </f:if>
+                                                    <f:if condition="{data_item.tx_mask_carousel_link}">
+                                                        <f:if condition="{data_item.tx_mask_carousel_link_label}">
+                                                            <f:link.typolink parameter="{data_item.tx_mask_carousel_link}" class="top-butn">
+                                                                <span>{data_item.tx_mask_carousel_link_label}</span>
+                                                                <f:for each="{data_item.tx_mask_link_image}" as="file">
+                                                                    <f:image image="{file}" width="65px" />
+                                                                </f:for>
+                                                            </f:link.typolink>
+                                                        </f:if>
+                                                    </f:if>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 ml-auto">
+                                                <div class="img-box">
+                                                    <f:for each="{data_item.tx_mask_carousel_image}" as="file">
+                                                        <f:image image="{file}" width="360px" height="360px"/>
+                                                    </f:for>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </f:if>
+                        </f:for>
+                    </f:if>
+                    <div class="carousel_btn-box">
+                        <a class="carousel-control-prev" href="#customCarousel1" role="button" data-slide="prev">
+                            <span class="sr-only">Prev</span>
+                        </a>
+                        <a class="carousel-control-next" href="#customCarousel1" role="button" data-slide="next">
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </f:for>
+    </f:for>
+</section>
+<!-- carousel ends -->

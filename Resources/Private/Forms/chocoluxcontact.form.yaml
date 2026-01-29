@@ -1,0 +1,124 @@
+
+renderingOptions:
+  submitButtonLabel: 'SEND NOW'
+type: Form
+identifier: chocoluxcontact
+label: 'chocolux contact'
+prototypeName: standard
+finishers:
+  -
+    options:
+      subject: 'contact form'
+      recipients:
+        aashro@gmail.com: Aashro
+      senderAddress: '{email-1}'
+      senderName: '{text-1}'
+      addHtmlPart: true
+      attachUploads: true
+      translation:
+        language: Default
+      title: ''
+    identifier: EmailToReceiver
+  -
+    options:
+      message: 'Your mail is confirm'
+      contentElementUid: ''
+    identifier: Confirmation
+renderables:
+  -
+    renderingOptions:
+      previousButtonLabel: ''
+      nextButtonLabel: ''
+    type: Page
+    identifier: page-1
+    label: ''
+    renderables:
+      -
+        defaultValue: ''
+        type: Text
+        identifier: text-1
+        label: ''
+        properties:
+          elementDescription: ''
+          fluidAdditionalAttributes:
+            placeholder: 'Full Name'
+            required: required
+          validationErrorMessages:
+            -
+              code: 1221560910
+              message: 'write your full name'
+            -
+              code: 1221560718
+              message: 'write your full name'
+            -
+              code: 1347992400
+              message: 'write your full name'
+            -
+              code: 1347992453
+              message: 'write your full name'
+        validators:
+          -
+            identifier: NotEmpty
+      -
+        defaultValue: ''
+        type: Text
+        identifier: text-2
+        label: ''
+        properties:
+          elementDescription: ''
+          fluidAdditionalAttributes:
+            placeholder: 'Phone number'
+            required: required
+          validationErrorMessages:
+            -
+              code: 1221560910
+              message: 'enter phone number'
+            -
+              code: 1221560718
+              message: 'enter phone number'
+            -
+              code: 1347992400
+              message: 'enter phone number'
+            -
+              code: 1347992453
+              message: 'enter phone number'
+        validators:
+          -
+            identifier: NotEmpty
+      -
+        defaultValue: ''
+        type: Email
+        identifier: email-1
+        label: ''
+        properties:
+          elementDescription: ''
+          fluidAdditionalAttributes:
+            placeholder: Email
+            required: required
+          validationErrorMessages:
+            -
+              code: 1221560910
+              message: 'enter proper format'
+            -
+              code: 1221560718
+              message: 'enter proper format'
+            -
+              code: 1347992400
+              message: 'enter proper format'
+            -
+              code: 1347992453
+              message: 'enter proper format'
+        validators:
+          -
+            identifier: EmailAddress
+          -
+            identifier: NotEmpty
+      -
+        defaultValue: ''
+        type: Textarea
+        identifier: textarea-1
+        label: ''
+        properties:
+          elementDescription: ''
+          fluidAdditionalAttributes:
+            placeholder: Message

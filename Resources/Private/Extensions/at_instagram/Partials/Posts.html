@@ -1,0 +1,56 @@
+<f:for each="{instamedia}" as="instadata" iteration="i">
+        <f:if condition="{data.display_type} == 1">
+            <f:then>
+                <a href='{instadata.permalink}' class="text-white" data-caption="{instaCaption}" target="_blank">
+                    <f:render section="insta-gallery-item" arguments="{_all}" />
+                </a>
+            </f:then>
+            <f:else>
+                <f:switch expression="{instadata.media_type}">
+                    <f:case value="CAROUSEL_ALBUM">
+                        <f:for each="{instadata.children.data}" as="carousel" iteration="i">
+                            <f:if condition="{i.isFirst}">
+                                <f:then>
+                                    <a href='{carousel.media_url}' data-fancybox="fancybox-{instadata.id}" data-caption="{instaCaption}">
+                                        <f:render section="insta-gallery-item" arguments="{_all}" />
+                                    </a>
+                                </f:then>
+                                <f:else>
+                                    <a href='{carousel.media_url}' data-fancybox="fancybox-{instadata.id}" data-caption="{instaCaption}" style="display: none;">{instadata.permalink}</a>
+                                </f:else>
+                            </f:if>
+                        </f:for>
+                    </f:case>
+                    <f:case value="VIDEO">
+                        <a href='{instadata.media_url}' data-fancybox="fancybox-{instadata.id}" data-caption="{instadata.caption}">
+                            <f:render section="insta-gallery-item" arguments="{_all}" />
+                        </a>
+                    </f:case>
+                    <f:defaultCase>
+                        <a href='{instadata.media_url}' data-fancybox="fancybox-{instadata.id}" data-caption="{instadata.caption}">
+                            <f:render section="insta-gallery-item" arguments="{_all}" />
+                        </a>
+                    </f:defaultCase>
+                </f:switch>
+            </f:else>
+        </f:if> 
+</f:for>
+
+<f:section name="insta-gallery-item">
+    <f:if condition="{instadata.media_type}=='VIDEO'">
+        <f:then>
+            <f:variable name="instaCaption"><f:format.crop maxCharacters="150" append="...">{instadata.caption}</f:format.crop> </f:variable>
+            <img src="{instadata.thumbnail_url}" class="slider-image gallery-image" alt="{instaCaption}" />
+            <f:if condition="{instaCaption}"><div class="caption">{instaCaption}</div></f:if>
+        </f:then>
+        <f:else>
+            <div class="insta_box d-flex m-1">
+                <div class="img-box p-1">
+            <f:variable name="instaCaption"><f:format.crop maxCharacters="35" append="...">{instadata.caption}</f:format.crop> </f:variable>
+                <img src="{instadata.media_url}" class="gallery-image slider-image" width="66px !important" alt="{instaCaption}" />
+            </div>
+                <f:if condition="{instaCaption}"><f:format.html>{instaCaption}</f:format.html> </f:if>
+            </div>
+        </f:else>
+    </f:if>
+</f:section>
